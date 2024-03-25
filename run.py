@@ -164,7 +164,7 @@ def validate_sales(values):
     """
     try:
         [int(value) for value in values]
-        if len(values) != 6:
+        if len(values) != 9:
             raise ValueError(
                 f"6 values required, you provided {len(values)}"
             )
@@ -176,7 +176,8 @@ def validate_sales(values):
 
 
 def sales_input():
-    typePrint("Enter days sales (6 numbers, separated by commas).\n")
+    typePrint("Enter date & sales figures "
+              "(DD,MM,YY, sales figures, separated by commas).\n")
     sales_figs = typeInput("Enter sales here: \n")
     sales_data = sales_figs.split(",")
     validate_sales(sales_data)
@@ -197,7 +198,7 @@ def sales_input():
         else:
             print("Invalid input, please try again.")
             continue
-    
+'''    
 def rec_sales():
     """
     Record daily sales
@@ -236,6 +237,7 @@ def rec_sales():
         print("Invalid date format, please try again.")
         time.sleep(2)
         rec_sales()
+'''
     
 def day_sales():
     """
@@ -254,7 +256,7 @@ def day_sales():
                 check_sales()
                 break
             elif choice == 2:
-                rec_sales()
+                sales_input()
                 break
         except ValueError:
             typePrint("Invalid input. Please choose a numbered menu item.")
@@ -313,32 +315,59 @@ def check_batch():
 def check_invt():
     """
     Pull inventory data from google sheet-inventory
-    Print list vertically 
+    Print list vertically
     """
     typePrint("Checking inventory levels...")
     time.sleep(1)
-    print("\n")
-    typePrint(f"Current inventory levels are:")
-    print("\n")
+    clearScreen()
+    typePrint(f"Current inventory levels are:\n")
     for key, value in ingInvt.items():
         print('- ', key, ':', value)
+    print("\n")
+    while True:
+        user_input = input("Would you like to update an item? Enter Y or N.\n")
+        if user_input == 'Y' or user_input == 'y':
+            clearScreen()
+            update_invt()
+            break
+        elif user_input == 'N' or user_input == 'n':
+            return_main()  
+            break 
     time.sleep(1)
     return_main()
 
 
+def user_update():
+    while True:
+        ing_name = input("Please choose items from the list: \n")
+        if ing_name in ingInvt:
+            updated_value = input("Enter new value for item: \n")
+            ingInvt[ing_name] = updated_value
+            print(f"{ing_name} updated to {updated_value}\n")
+            break
+        else:
+            print(f"{ing_name} is not in this list.\n")
+            continue
+
+
 def update_invt():
     """
-    Allow user to add additional ingredient amounts to increase
+    Allow user to add additional amount to increase
     inventory levels.
     """
-    typePrint("Current Inventory levels are:\n")
+    clearScreen()
+    typePrint("Update inventory levels.")
+    print("\n")
+    typePrint("Current Inventory levels are: ")
+    print("\n")
     time.sleep(1)
-    # user_update()
     for key, value in ingInvt.items():
         print('- ', key, ':', value)
-    ing_choice = typeInput("Enter your choice: \n")
-    ingInvt[ing_choice] = 'ing_value'
-    print(ingInvt)
+    user_update()
+    clearScreen()
+    typePrint("Updated inventory levels are: \n")
+    for key, value in ingInvt.items():
+        print('- ', key, ':', value)
     time.sleep(1)
     return_main()
 
