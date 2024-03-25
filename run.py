@@ -99,12 +99,13 @@ def return_main():
 
 def print_sales():
     """
-    Print sales data to terminal
+    Print sales data by date to terminal
     """
-    print('you have reached sales')
+    print('you have reached print sales')
 
     time.sleep(2)
     return_main()
+
 
 def check_sales():
     """
@@ -144,20 +145,7 @@ def check_sales():
         time.sleep(2)
         check_sales()
 
-    # date_data = data_str.split(" " + "-" + " " + "-" + " ")
-    # typePrint(f"You have entered : {date_data}\n")
-    # typeInput("Please confirm: Y or N\n")
-
-
-def sales_input():
-    typePrint("Enter days sales (6 numbers, separated by commas)\n")
-    data_str = typeInput("Enter sales here: \n")
-    sales_data = data_str.split(",")
-    validate_sales(sales_data)
-    typePrint(f"You have entered : {data_str}\n")
-    typeInput("Please confirm: Y or N\n")
-
-
+   
 def validate_sales(values):
     """
     Convert string values into integers and raise ValueError if 
@@ -213,7 +201,6 @@ def rec_sales():
                 choice = typeInput("Please confirm: Y or N\n")
                 try:
                     if choice == 'Y' or choice == 'y':
-                        print_sales()
                         sales_input()
                         break
                     elif choice == 'N' or choice == 'n':
@@ -236,7 +223,7 @@ def rec_sales():
         print("Invalid date format, please try again.")
         time.sleep(2)
         rec_sales()
-
+    
 def day_sales():
     """
     Go to sales menu
@@ -262,6 +249,7 @@ def day_sales():
             time.sleep(1.5)
             clearScreen()
             continue
+
 def print_batch():
     """
     Print batch numbers from date input
@@ -271,40 +259,96 @@ def print_batch():
     return_main()
 
 
-def Update_batch():
+def check_batch():
     """
-    User adds store reserve batch
+    Pull date of day batch nums data from google sheets-batch
     """
-    typePrint("Please enter store reserve batch (6 numbers, separated by commas)... \n")
-    data_str = typeInput("Enter batch here: \n")
-
-    batch_data = data_str.split(",")
-
-    typePrint(f"You have entered : {batch_data}\n")
-    typeInput("Please confirm: Y or N\n")
-    
+    clearScreen()
+    time.sleep(0.5)
+    typePrint("Please enter date in format DD-MM-YYYY...\n")
+    data_str = typeInput("Enter date here: \n")
+    if len(data_str) == 10:
+        try:
+            print("Valid Date")
+            typePrint(f"You have entered: {data_str}\n")
+            while True:
+                choice = typeInput("Please confirm: Y or N\n")
+                try:
+                    if choice == 'Y' or choice == 'y':
+                        print_batch()
+                        break
+                    elif choice == 'N' or choice == 'n':
+                        check_batch()
+                        break
+                    else:
+                        print("Invalid input, please try again")
+                        continue
+                except ValueError:
+                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY")
+                    clearScreen()
+                    time.sleep(.5)
+                    check_batch()
+        except ValueError:
+                print("Invalid Date")
+                clearScreen()
+                time.sleep(.5)
+                check_batch()
+    else:
+        print("Invalid date format, please try again.")
+        time.sleep(2)
+        check_batch()
 
 def check_invt():
     """
     Pull inventory data from google sheet-inventory
+    Print list vertically 
     """
-    typePrint("Checking inventory levels...\n")
+    typePrint("Checking inventory levels...")
     time.sleep(1)
-    typePrint("Current inventory levels are: \n")
+    print("\n")
+    typePrint(f"Current inventory levels are:")
+    print("\n")
+    for key, value in ingInvt.items():
+        print(key, ':', value)
 
-def Update_invt():
+    time.sleep(1)
+    return_main()
+
+
+def update_invt():
     """
-    User adds needed day inventory
+    Allow user to add additional ingredient amounts to increase
+    inventory levels.
     """
-    typePrint("Please enter day inventory (6 numbers, separated by commas)... \n")
-    data_str = typeInput("Enter batch here: \n")
+    typePrint("Please choose ingredient from the list: \n")
+    time.sleep(1)
+    print("""
+          1.  T-Shit
+          2.  Cup
+          3.  Book
+          4.  Map
+          5.  Picture
+          6.  Pen
+          7.  Pencil
+          8.  Cocoa
+          9.  Bracelets
+          
+          """)
 
-    invt_data = data_str.split(",")
+    choice = int(typeInput("Enter your choice: \n"))
+    time.sleep(1)
+    return_main()
 
-    typePrint(f"You have entered : {invt_data}\n")
-    typeInput("Please confirm: Y or N\n")
 
-def cal_pro()
+def calc_pro():
+    """
+    Calculate daily profits by subtracting total batch cost from
+    daily sales figure. Append profit worksheet to include days profits.
+    """
+    typePrint("Please enter date in format DD-MM-YYYY...\n")
+    data_str = typeInput("Enter date here: \n")
+    time.sleep(1)
+    return_main()
 
 
 def exit():
@@ -334,18 +378,14 @@ def main():
     print("5. Calculate profits.\n")
     print("6. Exit.\n")  
 
-    print('''
-        *******************************************************
-        * ALERT: All Set for the day.                     *
-        *******************************************************
-        ''')
+   
     while True:
         try:
             choice = int(typeInput("Enter your choice: \n"))
             if choice == 1:
                 day_sales()
             elif choice == 2:
-                Update_batch()
+                check_batch()
             elif choice == 3:
                 check_invt()
             elif choice == 4:
@@ -356,9 +396,8 @@ def main():
                 exit()
         except ValueError:
             typePrint("Invalid input. Please choose a numbered menu item...")
-            time.sleep(1.5)
-            clearScreen()
-            main()
+            time.sleep(1)
+            continue
 
 
 prog_start()
