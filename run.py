@@ -71,4 +71,26 @@ def prog_start():
 
    ''')
 
+
+
+
+def main():
+    """
+    Menu is displayed with options for user input
+    """
+    typePrint("Welcome to Afro GiftShop.\n")
+    time.sleep(1) 
+    print("\n")
+    typePrint("Please choose from the menu below.\n")
+    time.sleep(1)
+    print("\n")
+    print("1. Add sales.\n")
+    print("2. Check store reserve batch.\n")
+    print("3. Check inventory.\n")
+    print("4. Update inventory.\n")
+    print("5. Calculate profits.\n")
+    print("6. Exit.\n")  
+
 prog_start()
+
+main()
