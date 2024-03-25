@@ -83,6 +83,27 @@ def add_sales():
     typePrint(f"You have entered : {sales_data}\n")
     typeInput("Please confirm: Y or N\n")
 
+def add_batch():
+    """
+    User adds store reserve batch
+    """
+    typePrint("Please enter store reserve batch (6 numbers, separated by commas)... \n")
+    data_str = typeInput("Enter batch here: \n")
+
+    batch_data = data_str.split(",")
+
+    typePrint(f"You have entered : {batch_data}\n")
+    typeInput("Please confirm: Y or N\n")
+    
+
+def check_invt():
+    """
+    Pull inventory data from google sheet-inventory
+    """
+    typePrint("Checking inventory levels...\n")
+    time.sleep(1)
+    typePrint("Current inventory levels are: \n")
+
 
 def main():
     """
@@ -105,6 +126,10 @@ def main():
     choice = int(typeInput("Enter your choice: \n"))
     if choice == 1:
         add_sales()
+    elif choice == 2:
+        add_batch()
+    elif choice == 3:
+        check_invt()
 
 prog_start()
 
