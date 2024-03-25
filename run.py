@@ -35,6 +35,18 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # const for google sgeet
 SHEET = GSPREAD_CLIENT.open('afro_giftshop')
 
+ingInvt = {
+   "T-Shit": "500",
+    "Cup":"650",
+    "Book":"750",
+    "Map":"250",
+    "Picture":"850",
+    "Pen":"750",
+    "Pencil":"750",
+    "Cocoa":"150",
+    "Bracelets":"320"                   
+}
+
 
 def clearScreen():
     os.system("clear")
@@ -83,12 +95,11 @@ def return_main():
         choice = input("""
                        \n
                        \n
-                       \n
                        To return to Main Menu, please enter 'M'.
                        \n
                        """)
         if choice == 'M' or choice == 'm':
-            time.sleep(1.5)
+            time.sleep(1)
             clearScreen()
             main()
             break
@@ -101,8 +112,8 @@ def print_sales():
     """
     Print sales data by date to terminal
     """
-    print('you have reached print sales')
-
+    past_sales = SHEET.worksheet("sales").get_all_values()
+    print(past_sales)
     time.sleep(2)
     return_main()
 
@@ -112,14 +123,13 @@ def check_sales():
     Check sales by date and print in terminal
     """
     clearScreen()
-    typePrint("Please enter date in the format DD-MM-YYYY... \n")
-    data_str = typeInput("Enter date here: \n")
-    if len(data_str) == 10:
+    typePrint("Please enter date in the format DD-MM-YYYY.\n")
+    sales_date_str = typeInput("Enter date here: \n")
+    if len(sales_date_str) == 10:
         try:
-            print("Valid Date")
-            typePrint(f"You have entered: {data_str}\n")
+            typePrint(f"You have entered: {sales_date_str}\n")
             while True:
-                choice = typeInput("Please confirm: Y or N\n")
+                choice = typeInput("Please confirm: Y or N.\n")
                 try:
                     if choice == 'Y' or choice == 'y':
                         print_sales()
@@ -128,10 +138,10 @@ def check_sales():
                         check_sales()
                         break
                     else:
-                        print("Invalid input, please try again")
+                        print("Invalid input, please try again.")
                         continue
                 except ValueError:
-                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY")
+                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY.")
                     clearScreen()
                     time.sleep(.5)
                     check_sales()
@@ -162,19 +172,21 @@ def validate_sales(values):
         typePrint(f"Input invalid, please try again.\n")
         sales_input()
         return False
-
     return True
 
+
 def sales_input():
-    typePrint("Enter days sales (6 numbers, separated by commas)\n")
-    data_str = typeInput("Enter sales here: \n")
-    sales_data = data_str.split(",")
+    typePrint("Enter days sales (6 numbers, separated by commas).\n")
+    sales_figs = typeInput("Enter sales here: \n")
+    sales_data = sales_figs.split(",")
     validate_sales(sales_data)
-    typePrint(f"You have entered : {data_str}\n")
+    typePrint(f"You have entered : {sales_data}\n")
     while True:
-        choice = typeInput("Please confirm: Y or N\n")
+        choice = typeInput("Please confirm: Y or N.\n")
         if choice == 'Y' or choice == 'y':
-            typePrint(f"The sales figures {data_str} have been recorded.\n")
+            sales_sheet = SHEET.worksheet("sales")
+            sales_sheet.append_row(sales_data)
+            typePrint(f"The sales figures {sales_data} have been recorded.\n")
             time.sleep(1)
             print("\n")
             return_main()
@@ -183,39 +195,40 @@ def sales_input():
             sales_input()
             break
         else:
-            print("Invalid input, please try again")
+            print("Invalid input, please try again.")
             continue
-
-
+    
 def rec_sales():
     """
     Record daily sales
     """
-    typePrint("Please enter date in the format DD-MM-YYYY... \n")
-    data_str = typeInput("Enter date here: \n")
-    if len(data_str) == 10:
+    typePrint("Please enter date in the format DD-MM-YYYY.\n")
+    rec_date = typeInput("Enter date here: \n")
+    #gs_date_rec = datetime.strftime(rec_date, '%d/%m/%Y')
+    if len(rec_date) == 10:
         try:
-            print("Valid Date")
-            typePrint(f"You have entered: {data_str}\n")
+            typePrint(f"You have entered: {rec_date}\n")
             while True:
-                choice = typeInput("Please confirm: Y or N\n")
+                choice = typeInput("Please confirm: Y or N.\n")
                 try:
                     if choice == 'Y' or choice == 'y':
+                        # sales_date = SHEET.worksheet("sales")
+                        # sales_date.insert_rows(rec_date)
                         sales_input()
                         break
                     elif choice == 'N' or choice == 'n':
                         rec_sales()
                         break
                     else:
-                        print("Invalid input, please try again")
+                        print("Invalid input, please try again.")
                         continue
                 except ValueError:
-                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY")
+                    typePrint("Invalid input. Enter date in format DD-MM-YYYY.")
                     clearScreen()
                     time.sleep(.5)
                     rec_sales()
         except ValueError:
-                print("Invalid Date")
+                print("Invalid Date.")
                 clearScreen()
                 time.sleep(.5)
                 rec_sales()
@@ -229,15 +242,14 @@ def day_sales():
     Go to sales menu
     """
     clearScreen()
-    typePrint("Sales Menu")
-    time.sleep(1)
+    print("** Sales Menu **")
     while True:
         print("""
-            1. Check sales
-            2. Add days sales
+            1. Check sales by date.
+            2. Add days sales.
             """)
         try:
-            choice = int(typeInput("Please choose from menu...\n"))
+            choice = int(typeInput("Please choose from menu.\n"))
             if choice == 1:
                 check_sales()
                 break
@@ -250,14 +262,14 @@ def day_sales():
             clearScreen()
             continue
 
+
 def print_batch():
     """
     Print batch numbers from date input
     """
-    print("You have reached print batch")
+    print("You have reached print batch.")
     time.sleep(1)
     return_main()
-
 
 def check_batch():
     """
@@ -265,11 +277,10 @@ def check_batch():
     """
     clearScreen()
     time.sleep(0.5)
-    typePrint("Please enter date in format DD-MM-YYYY...\n")
+    typePrint("Please enter date in format DD-MM-YYYY.\n")
     data_str = typeInput("Enter date here: \n")
     if len(data_str) == 10:
         try:
-            print("Valid Date")
             typePrint(f"You have entered: {data_str}\n")
             while True:
                 choice = typeInput("Please confirm: Y or N\n")
@@ -284,7 +295,7 @@ def check_batch():
                         print("Invalid input, please try again")
                         continue
                 except ValueError:
-                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY")
+                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY.")
                     clearScreen()
                     time.sleep(.5)
                     check_batch()
@@ -298,6 +309,7 @@ def check_batch():
         time.sleep(2)
         check_batch()
 
+
 def check_invt():
     """
     Pull inventory data from google sheet-inventory
@@ -309,8 +321,7 @@ def check_invt():
     typePrint(f"Current inventory levels are:")
     print("\n")
     for key, value in ingInvt.items():
-        print(key, ':', value)
-
+        print('- ', key, ':', value)
     time.sleep(1)
     return_main()
 
@@ -320,22 +331,14 @@ def update_invt():
     Allow user to add additional ingredient amounts to increase
     inventory levels.
     """
-    typePrint("Please choose ingredient from the list: \n")
+    typePrint("Current Inventory levels are:\n")
     time.sleep(1)
-    print("""
-          1.  T-Shit
-          2.  Cup
-          3.  Book
-          4.  Map
-          5.  Picture
-          6.  Pen
-          7.  Pencil
-          8.  Cocoa
-          9.  Bracelets
-          
-          """)
-
-    choice = int(typeInput("Enter your choice: \n"))
+    # user_update()
+    for key, value in ingInvt.items():
+        print('- ', key, ':', value)
+    ing_choice = typeInput("Enter your choice: \n")
+    ingInvt[ing_choice] = 'ing_value'
+    print(ingInvt)
     time.sleep(1)
     return_main()
 
@@ -359,6 +362,7 @@ def exit():
     time.sleep(2)
     print("\n")
     print("\n")
+    clearScreen()
 
 
 def main():
