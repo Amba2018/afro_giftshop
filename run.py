@@ -35,6 +35,10 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # const for google sgeet
 SHEET = GSPREAD_CLIENT.open('afro_giftshop')
 
+
+def clearScreen():
+    os.system("clear")
+
 # typing effect function with delay effect for print and input
 # time.sleep() used as a pause effect with seconds parameter
 # clearScreen() to reset screen for new text
@@ -71,17 +75,40 @@ def prog_start():
 
    ''')
 
-def add_sales():
+def day_sales():
     """
-    User adds sales data.
+    Go to sales menu
     """
-    typePrint("Please enter days sales (6 numbers, separated by commas)... \n")
-    data_str = typeInput("Enter sales here: \n")
+    clearScreen()
+    typePrint("Sales Menu")
+    time.sleep(1)
+    print("""
+          1. Check sales
+          2. Add day sales
+          """)
+    try:
+        choice = int(typeInput("Please choose from menu...\n"))
+        if choice == 1:
+            check_sales()
+        elif choice ==2:
+            rec_sales()
+        except ValueError:
+        typePrint("Invalid input. Please choose a numbered menu item...")
+        time.sleep(1.5)
+        clearScreen()
+        day_sales()
 
-    sales_data = data_str.split(",")
-
-    typePrint(f"You have entered : {sales_data}\n")
+def check_sales():
+    """
+    Check sales and print in terminal
+    """
+    clearScreen()
+    typePrint("Please enter date in the format DD-MM-YYYY... \n")
+    data_str = typeInput("Enter date here: \n")
+    date_data = data_str.split(" " + "-" + " " + "-" + " ")
+    typePrint(f"You have entered : {date_data}\n")
     typeInput("Please confirm: Y or N\n")
+
 
 def Update_batch():
     """
@@ -146,20 +173,32 @@ def main():
     print("5. Calculate profits.\n")
     print("6. Exit.\n")  
 
+    print('''
+        *******************************************************
+        * ALERT: All Set for the day.                     *
+        *******************************************************
+        ''')
+    while True:
+        try:
+            choice = int(typeInput("Enter your choice: \n"))
+            if choice == 1:
+                add_sales()
+            elif choice == 2:
+                Update_batch()
+            elif choice == 3:
+                check_invt()
+            elif choice == 4:
+                Update_invt()
+            elif choice == 5:
+                calc_pro()
+            elif choice == 6:
+                exit()
+        except ValueError:
+            typePrint("Invalid input. Please choose a numbered menu item...")
+            time.sleep(1.5)
+            clearScreen()
+            main()
 
-    choice = int(typeInput("Enter your choice: \n"))
-    if choice == 1:
-        add_sales()
-    elif choice == 2:
-        Update_batch()
-    elif choice == 3:
-        check_invt()
-    elif choice == 4:
-        Update_invt()
-    elif choice == 5:
-        calc_pro()
-    elif choice == 6:
-        exit()
 
 prog_start()
 
