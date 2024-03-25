@@ -123,7 +123,7 @@ def print_sales():
     while True:
         choice = typeInput("To return to Sales Menu, please enter 'S'.\n")
         if choice == 'S' or choice == 's':
-            time.sleep(1.5)
+            time.sleep(2)
             clearScreen()
             day_sales()
             break
@@ -178,7 +178,7 @@ def sales_input():
             sales_sheet.append_row(sales_data)
             sales_sheet.append_row(sales_num_data)
             typePrint("The sales figures have been recorded.\n")
-            time.sleep(1)
+            time.sleep(2)
             print("\n")
             day_sales()
             break
@@ -647,7 +647,7 @@ def main():
     time.sleep(1)
     typePrint("Please choose from the menu below.\n")
     time.sleep(1)
-    print("\n")
+    #print("\n")
     print(Fore.CYAN + "1. Sales menu\n")
     print(Fore.CYAN + "2. Shop Batch\n")
     print(Fore.CYAN + "3. Shop inventory\n")
