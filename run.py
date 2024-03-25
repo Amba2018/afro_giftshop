@@ -71,7 +71,17 @@ def prog_start():
 
    ''')
 
+def add_sales():
+    """
+    User adds sales data.
+    """
+    typePrint("Please enter days sales (6 numbers, separated by commas)... \n")
+    data_str = typeInput("Enter sales here: \n")
 
+    sales_data = data_str.split(",")
+
+    typePrint(f"You have entered : {sales_data}\n")
+    typeInput("Please confirm: Y or N\n")
 
 
 def main():
@@ -90,6 +100,11 @@ def main():
     print("4. Update inventory.\n")
     print("5. Calculate profits.\n")
     print("6. Exit.\n")  
+
+
+    choice = int(typeInput("Enter your choice: \n"))
+    if choice == 1:
+        add_sales()
 
 prog_start()
 
