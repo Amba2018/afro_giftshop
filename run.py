@@ -83,7 +83,7 @@ def add_sales():
     typePrint(f"You have entered : {sales_data}\n")
     typeInput("Please confirm: Y or N\n")
 
-def add_batch():
+def Update_batch():
     """
     User adds store reserve batch
     """
@@ -104,6 +104,30 @@ def check_invt():
     time.sleep(1)
     typePrint("Current inventory levels are: \n")
 
+def Update_invt():
+    """
+    User adds needed day inventory
+    """
+    typePrint("Please enter day inventory (6 numbers, separated by commas)... \n")
+    data_str = typeInput("Enter batch here: \n")
+
+    invt_data = data_str.split(",")
+
+    typePrint(f"You have entered : {invt_data}\n")
+    typeInput("Please confirm: Y or N\n")
+
+def cal_pro()
+
+
+def exit():
+    """
+    return to program start screen
+    """
+    typePrint("Returning to program start...")
+    time.sleep(2)
+    print("\n")
+    print("\n")
+
 
 def main():
     """
@@ -116,7 +140,7 @@ def main():
     time.sleep(1)
     print("\n")
     print("1. Add sales.\n")
-    print("2. Check store reserve batch.\n")
+    print("2. Update store reserve batch.\n")
     print("3. Check inventory.\n")
     print("4. Update inventory.\n")
     print("5. Calculate profits.\n")
@@ -127,9 +151,15 @@ def main():
     if choice == 1:
         add_sales()
     elif choice == 2:
-        add_batch()
+        Update_batch()
     elif choice == 3:
         check_invt()
+    elif choice == 4:
+        Update_invt()
+    elif choice == 5:
+        calc_pro()
+    elif choice == 6:
+        exit()
 
 prog_start()
 
