@@ -73,8 +73,7 @@ def prog_start():
    Run opening screen for user and display menu options for user.
    '''
    print("\n")
-    print(Fore.CYAN + '''
- *****************************************************************************
+   print('''
                                                                              
      .oo  d'b                .oPYo.  o  d'b   o         8                    
     .P 8  8                  8    8     8     8         8                    
@@ -85,19 +84,9 @@ def prog_start():
 ..:::::..:..::..:::::.....::::....8 :..:..::::..::.....:..:::..:.....:8 ....:
 ::::::::::::::::::::::::::::::::::8 ::::::::::::::::::::::::::::::::::8 :::::
 ::::::::::::::::::::::::::::::::::..::::::::::::::::::::::::::::::::::..:::::
+''')
 
-*****************************************************************************
-   ''')
-print("\n")
-    print(Fore.CYAN + "             Sales & Inventory Management "
-          "\n")
-    time.sleep(1)
-    print(Fore.CYAN + "      (Created for Educational Purposes -"
-          " Copyright: Emmanuel Manu '24)")
-    time.sleep(3)
-    clearScreen()
-
-
+4
 def return_main():
     """
     Return to main menu
