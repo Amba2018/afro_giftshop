@@ -112,8 +112,21 @@ def print_sales():
     """
     Print sales data by date to terminal
     """
-    past_sales = SHEET.worksheet("sales").get_all_values()
-    print(past_sales)
+    clearScreen()
+    sales_sheet = SHEET.worksheet("sales").get_all_values()
+    typePrint("** Sales figures by date **\n")
+    print("""
+                       - SHOP LIST -
+                    T-Shit       Books
+                    Pens         Bracelets
+                    Cocoa        Cups\n
+          """)
+    # \t to format and display sales data from gsheet into terminal
+    print("****************************************************************\n")
+    for row in sales_sheet:
+        print('\t'.join(row))
+    print("\n")
+    print("****************************************************************\n")  
     time.sleep(2)
     return_main()
 
@@ -128,33 +141,26 @@ def check_sales():
     if len(sales_date_str) == 10:
         try:
             typePrint(f"You have entered: {sales_date_str}\n")
-            while True:
-                choice = typeInput("Please confirm: Y or N.\n")
-                try:
-                    if choice == 'Y' or choice == 'y':
-                        print_sales()
-                        break
-                    elif choice == 'N' or choice == 'n':
-                        check_sales()
-                        break
-                    else:
-                        print("Invalid input, please try again.")
-                        continue
-                except ValueError:
-                    typePrint("Invalid input. Please enter date in format DD-MM-YYYY.")
-                    clearScreen()
-                    time.sleep(.5)
-                    check_sales()
-        except ValueError:
-                print("Invalid Date")
-                clearScreen()
-                time.sleep(.5)
-                check_sales()
-    else:
-        print("Invalid date format, please try again.")
-        time.sleep(2)
+while True:
+    choice = typeInput("Please confirm: Y or N.\n")
+    try:
+        if choice == 'Y' or choice == 'y':
+            sales_sheet = SHEET.worksheet("sales").get_all_values()
+            for row in sales_sheet:
+                print('\t'.join(row))                    
+            break
+        elif choice == 'N' or choice == 'n':
+            check_sales()
+            break
+        else:
+            print("Invalid input, please try again.")
+            continue
+    except ValueError:
+        typePrint("Invalid input. Please enter date in format DD-MM-YYYY.")
+        clearScreen()
+        time.sleep(.5)
         check_sales()
-
+        
    
 def validate_sales(values):
     """
@@ -177,17 +183,18 @@ def validate_sales(values):
 
 def sales_input():
     typePrint("Enter date & sales figures "
-              "(DD,MM,YY, sales figures, separated by commas).\n")
+              "(DD,MM,YYYY, sales figures, separated by commas).\n")
     sales_figs = typeInput("Enter sales here: \n")
     sales_data = sales_figs.split(",")
     validate_sales(sales_data)
-    typePrint(f"You have entered : {sales_data}\n")
+    sales_str = ','.join(sales_data)
+    typePrint(f"You have entered : {sales_str}\n")
     while True:
         choice = typeInput("Please confirm: Y or N.\n")
         if choice == 'Y' or choice == 'y':
             sales_sheet = SHEET.worksheet("sales")
             sales_sheet.append_row(sales_data)
-            typePrint(f"The sales figures {sales_data} have been recorded.\n")
+            typePrint(f"The sales figures have been recorded.\n")
             time.sleep(1)
             print("\n")
             return_main()
@@ -320,7 +327,8 @@ def check_invt():
     typePrint("Checking inventory levels...")
     time.sleep(1)
     clearScreen()
-    typePrint(f"Current inventory levels are:\n")
+    typePrint(f"** Current inventory levels are: **\n")
+    print("\n")
     for key, value in ingInvt.items():
         print('- ', key, ':', value)
     print("\n")
@@ -339,35 +347,50 @@ def check_invt():
 
 def user_update():
     while True:
-        ing_name = input("Please choose items from the list: \n")
+        ing_name = input("Please choose ingredient from the list: \n")
         if ing_name in ingInvt:
-            updated_value = input("Enter new value for item: \n")
+            updated_value = input("Enter new value for ingredient: \n")
             ingInvt[ing_name] = updated_value
             print(f"{ing_name} updated to {updated_value}\n")
+            time.sleep(1.5)
             break
         else:
             print(f"{ing_name} is not in this list.\n")
             continue
 
 
+def print_invt_ws():
+    """
+    Print inventory levels to google sheet when updated
+    """
+    invt_sheet = SHEET.worksheet("inventory")
+    # convert dictionary to list of lists
+    invt_data = [value for value in ingInvt.items()]
+    invt_sheet.append_row(invt_data)
+
+
 def update_invt():
     """
-    Allow user to add additional amount to increase
+    Allow user to add additional amounts to increase
     inventory levels.
     """
     clearScreen()
-    typePrint("Update inventory levels.")
+    typePrint("** Update inventory levels. **")
     print("\n")
-    typePrint("Current Inventory levels are: ")
+    typePrint("** Current Inventory levels are: **")
     print("\n")
     time.sleep(1)
     for key, value in ingInvt.items():
         print('- ', key, ':', value)
+    print("\n")
     user_update()
+    print_invt_ws()
     clearScreen()
-    typePrint("Updated inventory levels are: \n")
+    typePrint("** Updated inventory levels are: **\n")
+    print("\n")
     for key, value in ingInvt.items():
         print('- ', key, ':', value)
+    print("\n")
     time.sleep(1)
     return_main()
 
