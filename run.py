@@ -276,7 +276,7 @@ def return_batch_menu():
     for pair in pairs:
         print(Fore.CYAN + '- ', pair[0], Fore.CYAN + ': ', pair[1])
     print("\n")
-    print(Fore.YELLOW + "Thank You for your service.\n")
+    print(Fore.YELLOW + "Thank You very much for your service.\n")
     while True:
         user_input = input("Would you like to update batches? Enter Y or N.\n")
         if user_input == 'Y' or user_input == 'y':
@@ -436,7 +436,7 @@ def check_batch():
     for pair in pairs:
         print(Fore.CYAN + '- ', pair[0], Fore.CYAN + ': ', pair[1])
     print("\n")
-    print(Fore.YELLOW + "Thank you very much for Service.\n")
+    print(Fore.YELLOW + "Thank you very much for your Service.\n")
     while True:
         user_input = input("Would you like to update batches? Enter Y or N.\n")
         if user_input == 'Y' or user_input == 'y':
