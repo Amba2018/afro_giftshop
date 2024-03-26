@@ -276,7 +276,7 @@ def return_batch_menu():
     for pair in pairs:
         print(Fore.CYAN + '- ', pair[0], Fore.CYAN + ': ', pair[1])
     print("\n")
-    print(Fore.YELLOW + "ATTN: Batch = 9 Souvenirs.\n")
+    print(Fore.YELLOW + "Thank You for your service.\n")
     while True:
         user_input = input("Would you like to update batches? Enter Y or N.\n")
         if user_input == 'Y' or user_input == 'y':
@@ -365,7 +365,7 @@ def user_update_batch():
                             print(Fore.CYAN + '- ', pair[0],
                                   Fore.CYAN + ': ', pair[1])
                         print("\n")
-                        print(Fore.YELLOW + "ATTN: Batch = 9 Souvenir.\n")
+                        print(Fore.YELLOW + "Thank you for your service.\n")
                         choice = input("Update another item?"
                                        " Enter Y or N.\n")
                         if choice == 'Y' or choice == 'y':
@@ -436,7 +436,7 @@ def check_batch():
     for pair in pairs:
         print(Fore.CYAN + '- ', pair[0], Fore.CYAN + ': ', pair[1])
     print("\n")
-    print(Fore.YELLOW + "ATTN: Batch = 9 Souvenir.\n")
+    print(Fore.YELLOW + "Thank you very much for Service.\n")
     while True:
         user_input = input("Would you like to update batches? Enter Y or N.\n")
         if user_input == 'Y' or user_input == 'y':
@@ -566,7 +566,7 @@ def invt_options():
     print(Fore.CYAN + "1. Add new item\n")
     print(Fore.CYAN + "2. Change item\n")
     print(Fore.CYAN + "3. Update item quantity\n")
-    print(Fore.CYAN + "4. Clear item item\n")
+    print(Fore.CYAN + "4. Clear item\n")
     print(Fore.CYAN + "5. Return to main menu\n")
     while True:
         try:
