@@ -64,8 +64,26 @@ Implementation
 
 ### Features Left to Implement
 
+As a future enhancement, I would like to add some basic functionality to keep track of sales and when to restock the store. 
+I would also like to implement reporting to the application that will allow users to know when to put in new orders for restock the inventory.
 
 ## Logical Flow
+
+**Main Menu**
+
+![Main Menu](docs/design/StartFlowchat.png)
+
+**Sales Menu**
+
+![Sales Menu](docs/design/SalesFlowchat.png)
+
+**Shop Day Batch**
+
+![Shop Day Batch](docs/design/BatchFlowchat.png)
+
+**Shop Inventory**
+
+![Shop Inventory](docs/design/BatchFlowchat.png)
 
 
 ## Database Design
