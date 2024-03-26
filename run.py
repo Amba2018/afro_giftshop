@@ -501,7 +501,7 @@ def user_update_ing():
                       " above: \n")
         record_found = False
         for record in records:
-            if record["Item"] == ing_c:
+            if record["Souvenirs"] == ing_c:
                 record_found = True
                 while True:
                     try:
