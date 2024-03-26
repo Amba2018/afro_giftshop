@@ -37,19 +37,20 @@ SHEET = GSPREAD_CLIENT.open('afro_giftshop')
 
 ingInvt = {
    "T-Shit": "500",
-    "Cup":"650",
-    "Book":"750",
-    "Map":"250",
-    "Picture":"850",
-    "Pen":"750",
-    "Pencil":"750",
-    "Cocoa":"150",
-    "Bracelets":"320"                   
+    "Cup": "650",
+    "Book": "750",
+    "Map": "250",
+    "Picture": "850",
+    "Pen": "750",
+    "Pencil": "750",
+    "Cocoa": "150",
+    "Bracelets": "320"    
 }
 
 
 def clearScreen():
     os.system("clear")
+
 
 # typing effect function with delay effect for print and input
 # time.sleep() used as a pause effect with seconds parameter
@@ -60,6 +61,7 @@ def typePrint(text):
         sys.stdout.flush()
         time.sleep(0.05)
 
+
 def typeInput(text):
     for character in text:
         sys.stdout.write(character)
@@ -68,25 +70,25 @@ def typeInput(text):
     value = input()
     return value
 
+
 def prog_start():
    '''
    Run opening screen for user and display menu options for user.
    '''
    print("\n")
-   print('''
-                                                                             
-     .oo  d'b                .oPYo.  o  d'b   o         8                    
-    .P 8  8                  8    8     8     8         8                    
-   .P  8 o8P  oPYo. .oPYo.   8      o8 o8P   o8P .oPYo. 8oPYo. .oPYo. .oPYo. 
-  oPooo8  8   8  `' 8    8   8   oo  8  8     8  Yb..   8    8 8    8 8    8 
- .P    8  8   8     8    8   8    8  8  8     8    'Yb. 8    8 8    8 8    8 
-.P     8  8   8     `YooP'   `YooP8  8  8     8  `YooP' 8    8 `YooP' 8YooP' 
+   print('''                                                                   
+     .oo  d'b                .oPYo.  o  d'b   o         8        
+    .P 8  8                  8    8     8     8         8
+   .P  8 o8P  oPYo. .oPYo.   8      o8 o8P   o8P .oPYo. 8oPYo. .oPYo. .oPYo.
+  oPooo8  8   8  `' 8    8   8   oo  8  8     8  Yb..   8    8 8    8 8    8
+ .P    8  8   8     8    8   8    8  8  8     8    'Yb. 8    8 8    8 8    8
+.P     8  8   8     `YooP'   `YooP8  8  8     8  `YooP' 8    8 `YooP' 8YooP'
 ..:::::..:..::..:::::.....::::....8 :..:..::::..::.....:..:::..:.....:8 ....:
 ::::::::::::::::::::::::::::::::::8 ::::::::::::::::::::::::::::::::::8 :::::
 ::::::::::::::::::::::::::::::::::..::::::::::::::::::::::::::::::::::..:::::
 ''')
 
-4
+
 def return_main():
     """
     Return to main menu
@@ -262,7 +264,7 @@ def day_sales():
             clearScreen()
             continue
 
-    
+
 def return_batch_menu():
     """
     Print updated batch number data for user and
@@ -286,6 +288,7 @@ def return_batch_menu():
         elif user_input == 'N' or user_input == 'n':
             return_main()
             break
+
 
 def add_batch_item():
     """
@@ -380,7 +383,7 @@ def user_update_batch():
         if not record_found:
             print(Fore.RED + "Item not found in inventory.\n")
             continue
-               
+
 
 def batch_options():
     """
@@ -647,7 +650,6 @@ def main():
     time.sleep(1)
     typePrint("Please choose from the menu below.\n")
     time.sleep(1)
-    #print("\n")
     print(Fore.CYAN + "1. Sales menu\n")
     print(Fore.CYAN + "2. Shop Batch\n")
     print(Fore.CYAN + "3. Shop inventory\n")
@@ -671,6 +673,7 @@ def main():
             print(Fore.RED + "Invalid input. Enter number for menu choice.\n")
             time.sleep(1)
             continue
+
 
 prog_start()
 main()
