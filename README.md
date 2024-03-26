@@ -1,32 +1,49 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Afro Giftshop
+[Afro Giftshop](https://afro-giftshop-4485fce00cde.herokuapp.com/) is a project created in order for small tourism businesses to easily keep track of their Giftshop sales, day batch and inventory. It will allow them to keep track of souvenirs sold as well as update them.
+It is customisable and editable to allow the user to change their shop batch and inventory items through multiple options.
 
-Welcome,
+View the live site [here](https://afro-giftshop-4485fce00cde.herokuapp.com/)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+# User Experience/User Interface (UX/UI)  
 
-## Reminders
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## User Goals
 
-## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## User Stories 
 
-1. `heroku/python`
-2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Structure
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
 
-Connect your GitHub repository and deploy as normal.
+### Features
 
-## Constraints
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Features Left to Implement
 
----
 
-Happy coding!
+## Logical Flow
+
+
+## Database Design
+
+
+## Technologies
+
+
+## Testing
+
+### Functional Testing
+
+### Pep8 Validation
+
+### Bugs and Fixes
+
+
+## Deployment
+
+### Version Control
+
+### Heroku Deployment
+
+## Credits
