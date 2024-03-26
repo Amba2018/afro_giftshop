@@ -103,11 +103,27 @@ I would also like to implement reporting to the application that will allow user
 * [Heroku](https://heroku.com/apps) - used for deploying the project.
 * [PEP8 Validator](https://pep8ci.herokuapp.com/#) - used for validating the Python code.
 
+
+## Libraries & Packages 
+**gspread** - gspread was imported and used to add, remove and manipulate data in the connected Google Sheets worksheets.  
+
+**google.oauth.service_account** - This library was used for the authentication needed to access the Google APIs for connecting the Service Account with the Credentials function. A `CREDS.json` file was generated from this with the details needed for the API to access my Google account which holds the Google Sheets worksheet containing the applications data. When deploying to Heroku, this information is then stored in the config var section to ensure the application will run.  
+
+**time & sys** -the time & sys libraries were used for the text-typing effect for typePrint and typeInput statements to create a visual effect 0f the text appearing on screen in real time.  
+
+**os** - os library was used to add the clearScreen() function to assist in creating a neater flow from Menu options by clearing the screen for the user's choice from the Menu to be displayed. 
+
+**colorama** - colorama was imported to give the terminal text colour and style to create a bright and engaging UI and to provide some visual feedback when a user's input is validated.
+
+
 ## Testing
 
-### Functional Testing
-
 ### Pep8 Validation
+
+All python code was ran through pep8online.com validator and any warnings or errors were fixed. Code then validated successfully.
+
+![Pep8](docs/test/Test.png)
+
 
 ### Bugs and Fixes
 
