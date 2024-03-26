@@ -89,8 +89,19 @@ I would also like to implement reporting to the application that will allow user
 ## Database Design
 
 
+
 ## Technologies
 
+* Python - Python code written is my own unless referenced in the source code or the below Credits section.
+* [Lucidchart](https://www.lucidchart.com) - used to create the flowchart needed during project planning.
+* [GitHub](https://github.com/) - used for hosting the program's source code.
+* [Gitpod](https://www.gitpod.io/) - used as a workspace for developing the code and testing the program.
+* Replit Desktop - used as a workspace for developing the code and testing the program.
+* Git - used for version control.
+* [Google Sheets](https://docs.google.com/spreadsheets/) - used for storing edited and saved user data.
+* [Google Cloud Platform](https://cloud.google.com/) - used to provide the APIs for connecting the data sheets with the Python code.
+* [Heroku](https://heroku.com/apps) - used for deploying the project.
+* [PEP8 Validator](https://pep8ci.herokuapp.com/#) - used for validating the Python code.
 
 ## Testing
 
