@@ -4,6 +4,8 @@ It is customisable and editable to allow the user to change their shop batch and
 
 View the live site [here](https://afro-giftshop-4485fce00cde.herokuapp.com/)
 
+![Mockup](docs/test/Responsiveness.png)
+
 # User Experience/User Interface (UX/UI)  
 
 
