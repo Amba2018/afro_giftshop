@@ -514,6 +514,10 @@ def user_update_ing():
                         cho = input("Update another item? Enter Y or N.")
                         print("\n")
                         if cho == 'Y' or cho == 'y':
+                            clearScreen()
+                            print(Back.MAGENTA + Fore.WHITE + Style.BRIGHT +
+                                  "*** CURRENT INVENTORY LEVELS ***\n")
+                            time.sleep(.5)
                             return_invt_menu()
                         elif cho == 'N' or cho == 'n':
                             return_main()
@@ -633,6 +637,7 @@ def exit():
     """
     return to program start screen
     """
+    typePrint("Thank you for your service.\n")
     typePrint("Returning to program start...")
     time.sleep(2)
     print("\n")
